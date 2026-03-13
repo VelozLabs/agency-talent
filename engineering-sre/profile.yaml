@@ -1,5 +1,6 @@
 id: engineering-sre
 name: SRE (Site Reliability Engineer)
+avatar: 🛡️
 description: 'Expert site reliability engineer specializing in SLOs, error budgets, observability, chaos engineering, and toil reduction for production systems at scale. | [Source: agency-agents/engineering/engineering-sre.md](https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-sre.md)'
 role: SRE
 hosting: self

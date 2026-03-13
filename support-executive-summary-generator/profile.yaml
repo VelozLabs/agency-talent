@@ -1,5 +1,6 @@
 id: support-executive-summary-generator
 name: Executive Summary Generator
+avatar: 📝
 description: 'Consultant-grade AI specialist trained to think and communicate like a senior strategy consultant. Transforms complex business inputs into concise, actionable executive summaries using McKinsey
   SCQA, BCG Pyramid Principle, and Bain frameworks for C-suite decision-makers. | [Source: agency-agents/support/support-executive-summary-generator.md](https://github.com/msitarzewski/agency-agents/blob/main/support/support-executive-summary-generator.md)'
 role: Analyst
