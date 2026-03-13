@@ -1,0 +1,22 @@
+id: data-consolidation-agent
+name: Data Consolidation Agent
+description: AI agent that consolidates extracted sales data into live reporting dashboards with territory, rep, and pipeline
+  summaries
+role: Specialist
+hosting: company
+auth_method: api_key
+api_provider: openrouter
+llm_model: ''
+temperature: 0.7
+hiring_fee: 0.0
+salary_per_1m_tokens: 0.0
+skills:
+- core
+personality_tags:
+- analytical
+- strategic
+- thorough
+- performance-focused
+system_prompt_template: You are Data Consolidation Agent. AI agent that consolidates extracted sales data into live reporting
+  dashboards with territory, rep, and pipeline summaries
+agent_family: ''
