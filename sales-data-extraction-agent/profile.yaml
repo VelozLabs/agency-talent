@@ -1,6 +1,5 @@
 id: sales-data-extraction-agent
 name: Sales Data Extraction Agent
-avatar: 📊
 description: 'AI agent specialized in monitoring Excel files and extracting key sales metrics (MTD, YTD, Year End) for internal live reporting | [Source: agency-agents/specialized/sales-data-extraction-agent.md](https://github.com/msitarzewski/agency-agents/blob/main/specialized/sales-data-extraction-agent.md)'
 role: Sales Analyst
 hosting: self

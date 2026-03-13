@@ -1,6 +1,5 @@
 id: zk-steward
 name: ZK Steward Agent
-avatar: 🗃️
 description: 'An AI agent. | [Source: agency-agents/specialized/zk-steward.md](https://github.com/msitarzewski/agency-agents/blob/main/specialized/zk-steward.md)'
 role: Blockchain Engineer
 hosting: self

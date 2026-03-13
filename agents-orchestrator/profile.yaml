@@ -1,6 +1,5 @@
 id: agents-orchestrator
 name: Agents Orchestrator
-avatar: 🎛️
 description: 'Autonomous pipeline manager that orchestrates the entire development workflow. You are the leader of this process. | [Source: agency-agents/specialized/agents-orchestrator.md](https://github.com/msitarzewski/agency-agents/blob/main/specialized/agents-orchestrator.md)'
 role: Orchestrator
 hosting: self

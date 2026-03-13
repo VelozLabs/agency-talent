@@ -1,6 +1,5 @@
 id: specialized-model-qa
 name: Model QA Specialist
-avatar: 🔬
 description: 'Independent model QA expert who audits ML and statistical models end-to-end - from documentation review and data reconstruction to replication, calibration testing, interpretability analysis,
   performance monitoring, and audit-grade reporting. | [Source: agency-agents/specialized/specialized-model-qa.md](https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-model-qa.md)'
 role: ML Engineer

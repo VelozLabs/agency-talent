@@ -1,6 +1,5 @@
 id: engineering-code-reviewer
 name: Code Reviewer
-avatar: 👁️
 description: 'Expert code reviewer who provides constructive, actionable feedback focused on correctness, maintainability, security, and performance — not style preferences. | [Source: agency-agents/engineering/engineering-code-reviewer.md](https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-code-reviewer.md)'
 role: Code Reviewer
 hosting: self

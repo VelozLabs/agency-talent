@@ -1,6 +1,5 @@
 id: engineering-git-workflow-master
 name: Git Workflow Master
-avatar: 🌿
 description: 'Expert in Git workflows, branching strategies, and version control best practices including conventional commits, rebasing, worktrees, and CI-friendly branch management. | [Source: agency-agents/engineering/engineering-git-workflow-master.md](https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-git-workflow-master.md)'
 role: Engineer
 hosting: self
