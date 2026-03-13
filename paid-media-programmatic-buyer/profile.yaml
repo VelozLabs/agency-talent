@@ -2,10 +2,10 @@ id: paid-media-programmatic-buyer
 name: Programmatic & Display Buyer
 description: 'Display advertising and programmatic media buying specialist covering managed placements, Google Display Network, DV360, trade desk platforms, partner media (newsletters, sponsored content),
   and ABM display strategies via platforms like Demandbase and 6Sense. | [Source: agency-agents/paid-media/paid-media-programmatic-buyer.md](https://github.com/msitarzewski/agency-agents/blob/main/paid-media/paid-media-programmatic-buyer.md)'
-role: Marketer
-hosting: company
+role: Media Buyer
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

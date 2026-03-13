@@ -1,10 +1,10 @@
 id: specialized-mcp-builder
 name: MCP Builder
 description: 'Expert Model Context Protocol developer who designs, builds, and tests MCP servers that extend AI agent capabilities with custom tools, resources, and prompts. | [Source: agency-agents/specialized/specialized-mcp-builder.md](https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-mcp-builder.md)'
-role: Specialist
-hosting: company
+role: Engineer
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

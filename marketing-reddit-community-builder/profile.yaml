@@ -2,10 +2,10 @@ id: marketing-reddit-community-builder
 name: Reddit Community Builder
 description: 'Expert Reddit marketing specialist focused on authentic community engagement, value-driven content creation, and long-term relationship building. Masters Reddit culture navigation. | [Source:
   agency-agents/marketing/marketing-reddit-community-builder.md](https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-reddit-community-builder.md)'
-role: Marketer
-hosting: company
+role: Community Manager
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

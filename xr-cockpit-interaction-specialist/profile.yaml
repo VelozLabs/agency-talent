@@ -1,10 +1,10 @@
 id: xr-cockpit-interaction-specialist
 name: XR Cockpit Interaction Specialist
 description: 'Specialist in designing and developing immersive cockpit-based control systems for XR environments | [Source: agency-agents/spatial-computing/xr-cockpit-interaction-specialist.md](https://github.com/msitarzewski/agency-agents/blob/main/spatial-computing/xr-cockpit-interaction-specialist.md)'
-role: Engineer
-hosting: company
+role: XR Engineer
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

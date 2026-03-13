@@ -2,9 +2,9 @@ id: testing-reality-checker
 name: Reality Checker
 description: 'Stops fantasy approvals, evidence-based certification - Default to "NEEDS WORK", requires overwhelming proof for production readiness | [Source: agency-agents/testing/testing-reality-checker.md](https://github.com/msitarzewski/agency-agents/blob/main/testing/testing-reality-checker.md)'
 role: QA Engineer
-hosting: company
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

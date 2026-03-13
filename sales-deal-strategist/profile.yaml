@@ -2,10 +2,10 @@ id: sales-deal-strategist
 name: Deal Strategist
 description: 'Senior deal strategist specializing in MEDDPICC qualification, competitive positioning, and win planning for complex B2B sales cycles. Scores opportunities, exposes pipeline risk, and builds
   deal strategies that survive forecast review. | [Source: agency-agents/sales/sales-deal-strategist.md](https://github.com/msitarzewski/agency-agents/blob/main/sales/sales-deal-strategist.md)'
-role: Sales
-hosting: company
+role: Sales Strategist
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

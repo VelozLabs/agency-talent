@@ -1,10 +1,10 @@
 id: macos-spatial-metal-engineer
 name: macOS Spatial/Metal Engineer
 description: 'Native Swift and Metal specialist building high-performance 3D rendering systems and spatial computing experiences for macOS and Vision Pro | [Source: agency-agents/spatial-computing/macos-spatial-metal-engineer.md](https://github.com/msitarzewski/agency-agents/blob/main/spatial-computing/macos-spatial-metal-engineer.md)'
-role: Engineer
-hosting: company
+role: XR Engineer
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

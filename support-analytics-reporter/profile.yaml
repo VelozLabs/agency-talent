@@ -2,10 +2,10 @@ id: support-analytics-reporter
 name: Analytics Reporter
 description: 'Expert data analyst transforming raw data into actionable business insights. Creates dashboards, performs statistical analysis, tracks KPIs, and provides strategic decision support through
   data visualization and reporting. | [Source: agency-agents/support/support-analytics-reporter.md](https://github.com/msitarzewski/agency-agents/blob/main/support/support-analytics-reporter.md)'
-role: Support
-hosting: company
+role: Data Analyst
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

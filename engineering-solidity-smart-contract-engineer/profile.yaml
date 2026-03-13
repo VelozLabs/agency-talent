@@ -2,10 +2,10 @@ id: engineering-solidity-smart-contract-engineer
 name: Solidity Smart Contract Engineer
 description: 'Expert Solidity developer specializing in EVM smart contract architecture, gas optimization, upgradeable proxy patterns, DeFi protocol development, and security-first contract design across
   Ethereum and L2 chains. | [Source: agency-agents/engineering/engineering-solidity-smart-contract-engineer.md](https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-solidity-smart-contract-engineer.md)'
-role: Engineer
-hosting: company
+role: Blockchain Engineer
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

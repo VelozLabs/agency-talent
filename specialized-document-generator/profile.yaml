@@ -2,10 +2,10 @@ id: specialized-document-generator
 name: Document Generator
 description: 'Expert document creation specialist who generates professional PDF, PPTX, DOCX, and XLSX files using code-based approaches with proper formatting, charts, and data visualization. | [Source:
   agency-agents/specialized/specialized-document-generator.md](https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-document-generator.md)'
-role: Specialist
-hosting: company
+role: Content Creator
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

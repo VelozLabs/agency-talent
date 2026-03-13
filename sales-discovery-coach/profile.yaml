@@ -1,10 +1,10 @@
 id: sales-discovery-coach
 name: Discovery Coach
 description: 'Coaches sales teams on elite discovery methodology — question design, current-state mapping, gap quantification, and call structure that surfaces real buying motivation. | [Source: agency-agents/sales/sales-discovery-coach.md](https://github.com/msitarzewski/agency-agents/blob/main/sales/sales-discovery-coach.md)'
-role: Sales
-hosting: company
+role: Sales Coach
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

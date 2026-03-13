@@ -2,10 +2,10 @@ id: supply-chain-strategist
 name: Supply Chain Strategist
 description: 'Expert supply chain management and procurement strategy specialist — skilled in supplier development, strategic sourcing, quality control, and supply chain digitalization. Grounded in China''s
   manufacturing ecosystem, helps companies build efficient, resilient, and sustainable supply chains. | [Source: agency-agents/specialized/supply-chain-strategist.md](https://github.com/msitarzewski/agency-agents/blob/main/specialized/supply-chain-strategist.md)'
-role: Specialist
-hosting: company
+role: Supply Chain Strategist
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

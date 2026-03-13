@@ -3,9 +3,9 @@ name: Image Prompt Engineer
 description: 'Expert photography prompt engineer specializing in crafting detailed, evocative prompts for AI image generation. Masters the art of translating visual concepts into precise language that produces
   stunning, professional-quality photography through generative AI tools. | [Source: agency-agents/design/design-image-prompt-engineer.md](https://github.com/msitarzewski/agency-agents/blob/main/design/design-image-prompt-engineer.md)'
 role: Designer
-hosting: company
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

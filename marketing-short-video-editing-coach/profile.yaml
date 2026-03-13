@@ -2,10 +2,10 @@ id: marketing-short-video-editing-coach
 name: Short-Video Editing Coach
 description: 'Hands-on short-video editing coach covering the full post-production pipeline, with mastery of CapCut Pro, Premiere Pro, DaVinci Resolve, and Final Cut Pro across composition and camera language,
   color grading, audio engineering, motion graphics and VFX, subtitle design, multi-platform export optimization, editing workflow efficiency, and AI-assisted editing. | [Source: agency-agents/marketing/marketing-short-video-editing-coach.md](https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-short-video-editing-coach.md)'
-role: Marketer
-hosting: company
+role: Content Creator
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

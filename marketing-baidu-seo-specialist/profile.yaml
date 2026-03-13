@@ -2,10 +2,10 @@ id: marketing-baidu-seo-specialist
 name: Baidu SEO Specialist
 description: 'Expert Baidu search optimization specialist focused on Chinese search engine ranking, Baidu ecosystem integration, ICP compliance, Chinese keyword research, and mobile-first indexing for the
   China market. | [Source: agency-agents/marketing/marketing-baidu-seo-specialist.md](https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-baidu-seo-specialist.md)'
-role: Marketer
-hosting: company
+role: SEO Specialist
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

@@ -2,10 +2,10 @@ id: paid-media-auditor
 name: Paid Media Auditor
 description: 'Comprehensive paid media auditor who systematically evaluates Google Ads, Microsoft Ads, and Meta accounts across 200+ checkpoints spanning account structure, tracking, bidding, creative,
   audiences, and competitive positioning. Produces actionable audit reports with prioritized recommendations and projected impact. | [Source: agency-agents/paid-media/paid-media-auditor.md](https://github.com/msitarzewski/agency-agents/blob/main/paid-media/paid-media-auditor.md)'
-role: Marketer
-hosting: company
+role: Media Buyer
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

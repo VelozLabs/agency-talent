@@ -2,10 +2,10 @@ id: support-legal-compliance-checker
 name: Legal Compliance Checker
 description: 'Expert legal and compliance specialist ensuring business operations, data handling, and content creation comply with relevant laws, regulations, and industry standards across multiple jurisdictions.
   | [Source: agency-agents/support/support-legal-compliance-checker.md](https://github.com/msitarzewski/agency-agents/blob/main/support/support-legal-compliance-checker.md)'
-role: Support
-hosting: company
+role: Compliance
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

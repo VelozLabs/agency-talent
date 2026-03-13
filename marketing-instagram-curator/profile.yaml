@@ -2,10 +2,10 @@ id: marketing-instagram-curator
 name: Instagram Curator
 description: 'Expert Instagram marketing specialist focused on visual storytelling, community building, and multi-format content optimization. Masters aesthetic development and drives meaningful engagement.
   | [Source: agency-agents/marketing/marketing-instagram-curator.md](https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-instagram-curator.md)'
-role: Marketer
-hosting: company
+role: Social Media Marketer
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

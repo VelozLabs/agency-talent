@@ -2,10 +2,10 @@ id: government-digital-presales-consultant
 name: Government Digital Presales Consultant
 description: 'Presales expert for China''s government digital transformation market (ToG), proficient in policy interpretation, solution design, bid document preparation, POC validation, compliance requirements
   (classified protection/cryptographic assessment/Xinchuang domestic IT), and stakeholder management — helping technical teams efficiently win government IT projects. | [Source: agency-agents/specialized/government-digital-presales-consultant.md](https://github.com/msitarzewski/agency-agents/blob/main/specialized/government-digital-presales-consultant.md)'
-role: Specialist
-hosting: company
+role: Consultant
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

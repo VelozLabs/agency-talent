@@ -1,10 +1,10 @@
 id: unity-shader-graph-artist
 name: Unity Shader Graph Artist
 description: 'Visual effects and material specialist - Masters Unity Shader Graph, HLSL, URP/HDRP rendering pipelines, and custom pass authoring for real-time visual effects | [Source: agency-agents/game-development/unity/unity-shader-graph-artist.md](https://github.com/msitarzewski/agency-agents/blob/main/game-development/unity/unity-shader-graph-artist.md)'
-role: Game Developer
-hosting: company
+role: Technical Artist
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

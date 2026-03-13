@@ -1,10 +1,10 @@
 id: testing-performance-benchmarker
 name: Performance Benchmarker
 description: 'Expert performance testing and optimization specialist focused on measuring, analyzing, and improving system performance across all applications and infrastructure | [Source: agency-agents/testing/testing-performance-benchmarker.md](https://github.com/msitarzewski/agency-agents/blob/main/testing/testing-performance-benchmarker.md)'
-role: QA Engineer
-hosting: company
+role: Performance Engineer
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

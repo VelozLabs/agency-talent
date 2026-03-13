@@ -2,10 +2,10 @@ id: specialized-model-qa
 name: Model QA Specialist
 description: 'Independent model QA expert who audits ML and statistical models end-to-end - from documentation review and data reconstruction to replication, calibration testing, interpretability analysis,
   performance monitoring, and audit-grade reporting. | [Source: agency-agents/specialized/specialized-model-qa.md](https://github.com/msitarzewski/agency-agents/blob/main/specialized/specialized-model-qa.md)'
-role: Specialist
-hosting: company
+role: ML Engineer
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

@@ -2,9 +2,9 @@ id: design-brand-guardian
 name: Brand Guardian
 description: 'Expert brand strategist and guardian specializing in brand identity development, consistency maintenance, and strategic brand positioning | [Source: agency-agents/design/design-brand-guardian.md](https://github.com/msitarzewski/agency-agents/blob/main/design/design-brand-guardian.md)'
 role: Designer
-hosting: company
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

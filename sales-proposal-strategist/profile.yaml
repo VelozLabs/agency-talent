@@ -2,10 +2,10 @@ id: sales-proposal-strategist
 name: Proposal Strategist
 description: 'Strategic proposal architect who transforms RFPs and sales opportunities into compelling win narratives. Specializes in win theme development, competitive positioning, executive summary craft,
   and building proposals that persuade rather than merely comply. | [Source: agency-agents/sales/sales-proposal-strategist.md](https://github.com/msitarzewski/agency-agents/blob/main/sales/sales-proposal-strategist.md)'
-role: Sales
-hosting: company
+role: Sales Strategist
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

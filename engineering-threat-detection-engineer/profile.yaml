@@ -2,10 +2,10 @@ id: engineering-threat-detection-engineer
 name: Threat Detection Engineer
 description: 'Expert detection engineer specializing in SIEM rule development, MITRE ATT&CK coverage mapping, threat hunting, alert tuning, and detection-as-code pipelines for security operations teams.
   | [Source: agency-agents/engineering/engineering-threat-detection-engineer.md](https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-threat-detection-engineer.md)'
-role: Engineer
-hosting: company
+role: Security Engineer
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

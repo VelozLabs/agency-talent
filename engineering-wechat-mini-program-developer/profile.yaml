@@ -3,9 +3,9 @@ name: WeChat Mini Program Developer
 description: 'Expert WeChat Mini Program developer specializing in 小程序 development with WXML/WXSS/WXS, WeChat API integration, payment systems, subscription messaging, and the full WeChat ecosystem. | [Source:
   agency-agents/engineering/engineering-wechat-mini-program-developer.md](https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-wechat-mini-program-developer.md)'
 role: Engineer
-hosting: company
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

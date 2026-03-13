@@ -3,10 +3,10 @@ name: Healthcare Marketing Compliance Specialist
 description: 'Expert in healthcare marketing compliance in China, proficient in the Advertising Law, Medical Advertisement Management Measures, Drug Administration Law, and related regulations — covering
   pharmaceuticals, medical devices, medical aesthetics, health supplements, and internet healthcare across content review, risk control, platform rule interpretation, and patient privacy protection, helping
   enterprises conduct effective health marketing within legal boundaries. | [Source: agency-agents/specialized/healthcare-marketing-compliance.md](https://github.com/msitarzewski/agency-agents/blob/main/specialized/healthcare-marketing-compliance.md)'
-role: Specialist
-hosting: company
+role: Compliance Specialist
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

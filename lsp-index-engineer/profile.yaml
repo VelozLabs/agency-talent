@@ -1,10 +1,10 @@
 id: lsp-index-engineer
 name: LSP/Index Engineer
 description: 'Language Server Protocol specialist building unified code intelligence systems through LSP client orchestration and semantic indexing | [Source: agency-agents/specialized/lsp-index-engineer.md](https://github.com/msitarzewski/agency-agents/blob/main/specialized/lsp-index-engineer.md)'
-role: Specialist
-hosting: company
+role: Engineer
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

@@ -2,10 +2,10 @@ id: engineering-data-engineer
 name: Data Engineer
 description: 'Expert data engineer specializing in building reliable data pipelines, lakehouse architectures, and scalable data infrastructure. Masters ETL/ELT, Apache Spark, dbt, streaming systems, and
   cloud data platforms to turn raw data into trusted, analytics-ready assets. | [Source: agency-agents/engineering/engineering-data-engineer.md](https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-data-engineer.md)'
-role: Engineer
-hosting: company
+role: Data Engineer
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

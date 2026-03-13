@@ -2,10 +2,10 @@ id: engineering-security-engineer
 name: Security Engineer
 description: 'Expert application security engineer specializing in threat modeling, vulnerability assessment, secure code review, and security architecture design for modern web and cloud-native applications.
   | [Source: agency-agents/engineering/engineering-security-engineer.md](https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-security-engineer.md)'
-role: Engineer
-hosting: company
+role: Security Engineer
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

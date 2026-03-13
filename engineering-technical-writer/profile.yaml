@@ -2,10 +2,10 @@ id: engineering-technical-writer
 name: Technical Writer
 description: 'Expert technical writer specializing in developer documentation, API references, README files, and tutorials. Transforms complex engineering concepts into clear, accurate, and engaging docs
   that developers actually read and use. | [Source: agency-agents/engineering/engineering-technical-writer.md](https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-technical-writer.md)'
-role: Engineer
-hosting: company
+role: Technical Writer
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

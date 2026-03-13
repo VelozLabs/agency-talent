@@ -2,10 +2,10 @@ id: project-management-studio-producer
 name: Studio Producer
 description: 'Senior strategic leader specializing in high-level creative and technical project orchestration, resource allocation, and multi-project portfolio management. Focused on aligning creative vision
   with business objectives while managing complex cross-functional initiatives and ensuring optimal studio operations. | [Source: agency-agents/project-management/project-management-studio-producer.md](https://github.com/msitarzewski/agency-agents/blob/main/project-management/project-management-studio-producer.md)'
-role: Project Manager
-hosting: company
+role: Producer
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

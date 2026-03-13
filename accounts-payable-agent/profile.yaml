@@ -2,10 +2,10 @@ id: accounts-payable-agent
 name: Accounts Payable Agent
 description: 'Autonomous payment processing specialist that executes vendor payments, contractor invoices, and recurring bills across any payment rail — crypto, fiat, stablecoins. Integrates with AI agent
   workflows via tool calls. | [Source: agency-agents/specialized/accounts-payable-agent.md](https://github.com/msitarzewski/agency-agents/blob/main/specialized/accounts-payable-agent.md)'
-role: Specialist
-hosting: company
+role: Finance
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

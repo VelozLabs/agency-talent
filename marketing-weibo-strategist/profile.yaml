@@ -2,10 +2,10 @@ id: marketing-weibo-strategist
 name: Weibo Strategist
 description: 'Full-spectrum operations expert for Sina Weibo, with deep expertise in trending topic mechanics, Super Topic community management, public sentiment monitoring, fan economy strategies, and
   Weibo advertising, helping brands achieve viral reach and sustained growth on China''s leading public discourse platform. | [Source: agency-agents/marketing/marketing-weibo-strategist.md](https://github.com/msitarzewski/agency-agents/blob/main/marketing/marketing-weibo-strategist.md)'
-role: Marketer
-hosting: company
+role: Social Media Marketer
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

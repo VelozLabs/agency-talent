@@ -1,10 +1,10 @@
 id: data-consolidation-agent
 name: Data Consolidation Agent
 description: 'AI agent that consolidates extracted sales data into live reporting dashboards with territory, rep, and pipeline summaries | [Source: agency-agents/specialized/data-consolidation-agent.md](https://github.com/msitarzewski/agency-agents/blob/main/specialized/data-consolidation-agent.md)'
-role: Specialist
-hosting: company
+role: Data Engineer
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

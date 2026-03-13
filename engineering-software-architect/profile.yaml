@@ -1,10 +1,10 @@
 id: engineering-software-architect
 name: Software Architect
 description: 'Expert software architect specializing in system design, domain-driven design, architectural patterns, and technical decision-making for scalable, maintainable systems. | [Source: agency-agents/engineering/engineering-software-architect.md](https://github.com/msitarzewski/agency-agents/blob/main/engineering/engineering-software-architect.md)'
-role: Engineer
-hosting: company
+role: Software Architect
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0

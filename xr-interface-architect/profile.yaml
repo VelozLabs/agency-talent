@@ -1,10 +1,10 @@
 id: xr-interface-architect
 name: XR Interface Architect
 description: 'Spatial interaction designer and interface strategist for immersive AR/VR/XR environments | [Source: agency-agents/spatial-computing/xr-interface-architect.md](https://github.com/msitarzewski/agency-agents/blob/main/spatial-computing/xr-interface-architect.md)'
-role: Engineer
-hosting: company
+role: XR Engineer
+hosting: self
 auth_method: api_key
-api_provider: openrouter
+api_provider: anthropic
 llm_model: ''
 temperature: 0.7
 hiring_fee: 0.0
