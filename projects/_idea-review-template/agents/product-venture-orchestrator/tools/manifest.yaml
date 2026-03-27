@@ -1,0 +1,36 @@
+# Tool manifest — declare tools this agent can use
+
+builtin_tools:
+  - Read
+  - Write
+
+# agent_tools:
+#   Agents dispatched during the review process:
+#
+#   session-01:
+#     - product-idea-generator
+#
+#   session-02:
+#     - product-trend-researcher
+#     - marketing-seo-specialist
+#
+#   session-03:
+#     - engineering-backend-architect
+#     - engineering-data-engineer
+#
+#   session-04:
+#     - design-ux-researcher
+#
+#   session-05:
+#     - sales-outbound-strategist
+#     - sales-account-strategist
+#     - marketing-growth-hacker
+#
+#   session-06:
+#     - support-legal-compliance-checker
+#
+#   session-07:
+#     - product-sprint-prioritizer
+#
+#   session-08:
+#     - testing-reality-checker
