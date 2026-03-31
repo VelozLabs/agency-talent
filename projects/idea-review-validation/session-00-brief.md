@@ -1,7 +1,7 @@
 # Session 00 — Idea Review & Validation Brief
 **Project**: Idea Review & Validation
 **Date**: 2026-03-31
-**Status**: Awaiting Ideas (3 ideas to be submitted)
+**Status**: In Progress — Ideas submitted, validation underway
 
 ---
 
@@ -61,10 +61,10 @@ Each idea receives:
 
 ---
 
-## Ideas (To Be Submitted)
+## Ideas
 
 | # | Idea | Status |
 |---|---|---|
-| 1 | _Pending_ | Awaiting input |
-| 2 | _Pending_ | Awaiting input |
-| 3 | _Pending_ | Awaiting input |
+| 1 | Smart Receivables & Cash-Flow Assistant | Submitted — Session 01 |
+| 2 | Simple CRM & Follow-Up Engine for Service Businesses | Submitted — Session 01 |
+| 3 | Micro-HR, Training & Scheduling Cockpit | Submitted — Session 01 |
