@@ -7,7 +7,9 @@
 
 ## Purpose
 
-Evaluate three ideas through a structured validation process covering market viability, technical feasibility, user demand, competitive positioning, business model strength, and execution risk. Each idea receives an independent assessment before a comparative ranking.
+Deep-validate a single idea — **Smart Receivables & Cash-Flow Assistant** — through a structured process covering market viability, technical feasibility, user demand, competitive positioning, business model strength, and execution risk.
+
+> **Pivot (Session 01)**: Founder elected to focus exclusively on Idea 1. Ideas 2 (Simple CRM) and 3 (Micro-HR) are parked. All remaining sessions target the Receivables assistant only.
 
 ## Validation Team (9 Agents)
 
@@ -25,7 +27,7 @@ Evaluate three ideas through a structured validation process covering market via
 
 ## Validation Framework
 
-Each idea will be evaluated across six dimensions (scored 1–5):
+The idea will be evaluated across six dimensions (scored 1–5):
 
 | Dimension | Lead Agent(s) |
 |---|---|
@@ -41,23 +43,22 @@ Each idea will be evaluated across six dimensions (scored 1–5):
 | Session | Focus | Agent(s) |
 |---|---|---|
 | 00 | Brief & team assembly | — |
-| 01 | Idea intake — founder describes all 3 ideas | — |
-| 02 | Market & trend analysis per idea | Trend Researcher, Growth Hacker |
-| 03 | User demand & UX validation per idea | Feedback Synthesizer, UX Researcher |
-| 04 | Technical feasibility & MVP scoping per idea | Software Architect, Rapid Prototyper |
-| 05 | Business model & competitive positioning per idea | Deal Strategist, Growth Hacker |
-| 06 | Experiment design & risk mapping per idea | Experiment Tracker |
-| 07 | Reality check — stress-test all 3 ideas | Reality Checker |
-| 08 | Comparative scorecard & final recommendation | All agents |
+| 01 | Idea intake & pivot to single idea | — |
+| 02 | Market & trend analysis | Trend Researcher, Growth Hacker |
+| 03 | User demand & UX validation | Feedback Synthesizer, UX Researcher |
+| 04 | Technical feasibility & MVP scoping | Software Architect, Rapid Prototyper |
+| 05 | Business model & competitive positioning | Deal Strategist, Growth Hacker |
+| 06 | Experiment design & risk mapping | Experiment Tracker |
+| 07 | Reality check — stress-test | Reality Checker |
+| 08 | Final scorecard & go/no-go recommendation | All agents |
 
 ## Scoring Output (Session 08)
 
-Each idea receives:
+The idea receives:
 - A 1–5 score per dimension (6 dimensions)
 - A weighted composite score
 - A go / no-go / pivot recommendation
 - Top 3 risks and suggested de-risking experiments
-- A comparative ranking across all 3 ideas
 
 ---
 
@@ -65,6 +66,6 @@ Each idea receives:
 
 | # | Idea | Status |
 |---|---|---|
-| 1 | Smart Receivables & Cash-Flow Assistant | Submitted — Session 01 |
-| 2 | Simple CRM & Follow-Up Engine for Service Businesses | Submitted — Session 01 |
-| 3 | Micro-HR, Training & Scheduling Cockpit | Submitted — Session 01 |
+| 1 | **Smart Receivables & Cash-Flow Assistant** | **Active** — validation in progress |
+| 2 | ~~Simple CRM & Follow-Up Engine for Service Businesses~~ | Parked — pivot at Session 01 |
+| 3 | ~~Micro-HR, Training & Scheduling Cockpit~~ | Parked — pivot at Session 01 |

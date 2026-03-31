@@ -1,6 +1,7 @@
 # Idea Review & Validation — Risk Register
 **Project**: Idea Review & Validation
-**Last Updated**: Session 00 (2026-03-31)
+**Last Updated**: Session 01 (2026-03-31)
+**Focus**: Smart Receivables & Cash-Flow Assistant (pivot from 3-idea review)
 
 ---
 
@@ -8,7 +9,10 @@
 
 | ID | Risk | Severity | First Raised | Status | Notes |
 |---|---|---|---|---|---|
-| — | No risks identified yet | — | — | — | Risk register will populate as ideas are submitted and evaluated |
+| R01 | QuickBooks/Xero native reminder improvements could erode differentiation | MEDIUM | Session 02 | Monitor | Track quarterly product updates from Intuit and Xero |
+| R02 | SMS compliance (TCPA, 10DLC) adds regulatory complexity and cost | MEDIUM | Session 02 | Open | Must be designed into product architecture, not bolted on |
+| R03 | Churn risk after initial "recovery spike" flattens at month 3–6 | MEDIUM | Session 02 | Open | Cash-flow forecasting must provide ongoing value beyond collections |
+| R04 | Tone miscalibration in automated follow-ups damages customer relationships | HIGH | Session 02 | Open | Requires strong template defaults and user control over tone per customer type |
 
 ---
 
