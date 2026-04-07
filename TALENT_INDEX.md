@@ -1,6 +1,6 @@
 # Complete Talent Index
 
-**Total Talents: 145**
+**Total Talents: 151**
 
 This is a searchable index of all talents organized alphabetically by directory name and tagged by category.
 
@@ -150,6 +150,12 @@ This is a searchable index of all talents organized alphabetically by directory 
 
 ## S
 
+- **soccer-dad-brand-strategist** `marketing` - Soccer Dad brand positioning & strategy
+- **soccer-dad-community-manager** `marketing` - Soccer Dad Collective community management
+- **soccer-dad-content-creator** `marketing` - Soccer Dad bilingual Instagram/TikTok content
+- **soccer-dad-creative-director** `design` - Soccer Dad visual identity & brand assets
+- **soccer-dad-cultural-marketing-specialist** `marketing` - Soccer Dad bilingual/Latino cultural marketing
+- **soccer-dad-merch-developer** `marketing` - Soccer Dad apparel product development & drops
 - **sales-account-strategist** `sales` - Account strategy
 - **sales-coach** `sales` - Sales coaching
 - **sales-data-extraction-agent** `sales` - Sales data extraction

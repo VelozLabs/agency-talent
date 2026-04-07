@@ -46,7 +46,7 @@ Platform integrations, API development, and specialized connectors.
 - **lsp-index-engineer** - LSP implementation
 - *And 2+ more integration specialists*
 
-## Marketing (27+ talents)
+## Marketing (33+ talents)
 Social media strategists, content creators, and platform-specific marketers.
 - **marketing-seo-specialist** - SEO optimization
 - **marketing-content-creator** - Content creation
@@ -57,6 +57,15 @@ Social media strategists, content creators, and platform-specific marketers.
 - **marketing-wechat-official-account** - WeChat marketing
 - **marketing-instagram-curator** - Instagram strategy
 - *And 19+ more platform-specific marketers*
+
+### Soccer Dad Brand Team (6 agents)
+A complete brand, marketing, and community agent team for the Soccer Dad Lifestyle Brand — a bilingual, community-first apparel brand for youth soccer parents.
+- **soccer-dad-brand-strategist** - Brand positioning, voice, competitive differentiation
+- **soccer-dad-content-creator** - Bilingual Instagram/TikTok sideline content
+- **soccer-dad-community-manager** - The Collective email community & local chapters
+- **soccer-dad-merch-developer** - Apparel product development, supplier sourcing, drop strategy
+- **soccer-dad-creative-director** - Visual identity, logo, color palette, typography
+- **soccer-dad-cultural-marketing-specialist** - Latino/bilingual cultural authenticity & strategy
 
 ## Paid Media (7 talents)
 PPC, programmatic advertising, and paid social specialists.
