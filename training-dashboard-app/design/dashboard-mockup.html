@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Training Dashboard — Timeline</title>
+<style>
+  /* ============================================================
+     DESIGN TOKENS — dark, data-dense, terminal
+     ============================================================ */
+  :root{
+    /* canvas */
+    --bg-0:#070809;      /* page void */
+    --bg-1:#0c0e10;      /* panel */
+    --bg-2:#121517;      /* raised panel */
+    --bg-3:#181c1f;      /* hover / row */
+    --line:#222a2e;      /* hairline borders */
+    --line-soft:#1a2024;
+
+    /* ink */
+    --ink-0:#e8efe9;     /* primary text */
+    --ink-1:#9fb0a7;     /* secondary */
+    --ink-2:#5f6e67;     /* muted / axis */
+    --ink-3:#3a4641;     /* faint / ghost */
+
+    /* signal palette — phosphor green spine + 3 source hues */
+    --spine:#3ddc84;     /* training / actual  (green phosphor) */
+    --spine-dim:#1f6b45;
+    --ladder:#7aa2ff;    /* lift detail  (blue) */
+    --health:#ff7a59;    /* apple health / physiology (warm) */
+    --oura:#c08bff;      /* oura / recovery (violet) */
+    --warn:#ffd24a;
+    --bad:#ff6b6b;
+    --good:#3ddc84;
+
+    --planned:#2a3a33;   /* ghosted future */
+
+    /* type */
+    --mono:"SFMono-Regular",ui-monospace,"JetBrains Mono","Menlo",Consolas,monospace;
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+
+    --r:6px;             /* radius */
+    --gap:14px;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, #0d1411 0%, transparent 60%),
+      var(--bg-0);
+    color:var(--ink-0);
+    font-family:var(--mono);
+    font-size:13px;
+    line-height:1.45;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:rgba(61,220,132,.25)}
+  .mono{font-family:var(--mono)}
+  .sans{font-family:var(--sans)}
+  .dim{color:var(--ink-1)}
+  .mut{color:var(--ink-2)}
+  .num{font-variant-numeric:tabular-nums}
+
+  /* ============================================================
+     SHELL
+     ============================================================ */
+  .app{max-width:1340px;margin:0 auto;padding:18px 22px 60px}
+
+  header.top{
+    display:flex;align-items:baseline;gap:18px;
+    padding-bottom:12px;margin-bottom:18px;
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex;align-items:baseline;gap:10px}
+  .brand .glyph{color:var(--spine);font-weight:700;letter-spacing:.5px}
+  .brand h1{font-size:14px;font-weight:600;letter-spacing:.4px;margin:0}
+  .brand .ver{color:var(--ink-2);font-size:11px}
+  .top .spacer{flex:1}
+  .clock{color:var(--ink-1);font-size:12px}
+  .clock b{color:var(--ink-0);font-weight:600}
+  .syncbtn{
+    background:var(--bg-2);border:1px solid var(--line);color:var(--ink-1);
+    font-family:var(--mono);font-size:11px;padding:5px 11px;border-radius:var(--r);
+    cursor:pointer;display:flex;align-items:center;gap:7px;
+  }
+  .syncbtn:hover{border-color:var(--spine-dim);color:var(--ink-0)}
+  .dot{width:6px;height:6px;border-radius:50%;display:inline-block}
+  .dot.live{background:var(--spine);box-shadow:0 0 7px var(--spine)}
+
+  .legend{display:flex;gap:16px;font-size:11px;color:var(--ink-2);margin-left:4px}
+  .legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+
+  /* ============================================================
+     LAYOUT GRID  — spine on top, then [Today card | Trends]
+     ============================================================ */
+  .grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:var(--gap)}
+  @media (max-width:980px){.grid{grid-template-columns:1fr}}
+
+  .panel{
+    background:linear-gradient(180deg,var(--bg-1),#0a0c0d);
+    border:1px solid var(--line);border-radius:var(--r);
+  }
+  .panel > .ph{
+    display:flex;align-items:center;gap:10px;
+    padding:10px 14px;border-bottom:1px solid var(--line-soft);
+  }
+  .ph .label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-1)}
+  .ph .sub{color:var(--ink-2);font-size:11px}
+  .ph .spacer{flex:1}
+  .pbody{padding:14px}
+
+  /* ============================================================
+     TIMELINE SPINE
+     ============================================================ */
+  .timeline-panel{grid-column:1 / -1;margin-bottom:var(--gap)}
+  .tl-wrap{position:relative;padding:26px 14px 16px}
+  .tl-axis{
+    position:relative;height:2px;background:var(--line);
+    margin:46px 6px 36px;
+  }
+  /* "now" marker */
+  .now{position:absolute;top:-44px;bottom:-30px;width:1px;background:linear-gradient(var(--spine),transparent);}
+  .now::before{content:"NOW";position:absolute;top:-16px;left:-13px;font-size:9px;letter-spacing:2px;color:var(--spine)}
+  .past-fill{position:absolute;left:0;top:0;height:2px;background:linear-gradient(90deg,var(--spine-dim),var(--spine))}
+
+  .node{
+    position:absolute;top:50%;transform:translate(-50%,-50%);
+    width:13px;height:13px;border-radius:50%;cursor:pointer;
+    background:var(--bg-0);border:2px solid var(--spine);
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .node:hover{transform:translate(-50%,-50%) scale(1.25)}
+  .node.actual{background:var(--spine);box-shadow:0 0 0 4px rgba(61,220,132,.12)}
+  .node.both{background:var(--spine);box-shadow:0 0 0 4px rgba(122,162,255,.16)}
+  .node.planned{background:var(--bg-0);border-color:var(--planned);border-style:dashed}
+  .node.rest{width:7px;height:7px;border-color:var(--ink-3);background:var(--bg-0)}
+  .node.sel{box-shadow:0 0 0 4px rgba(61,220,132,.18),0 0 14px var(--spine);transform:translate(-50%,-50%) scale(1.35)}
+
+  /* caption under each node */
+  .ncap{position:absolute;top:24px;left:50%;transform:translateX(-50%);text-align:center;white-space:nowrap;font-size:10px;color:var(--ink-2)}
+  .ncap b{display:block;color:var(--ink-1);font-size:11px;font-weight:600}
+  .ncap .day{color:var(--ink-3);font-size:9px;letter-spacing:1px}
+  /* readiness pip above node */
+  .npip{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--oura);white-space:nowrap}
+  .npip.lo{color:var(--warn)}
+  .npip.planned{color:var(--ink-3)}
+
+  .tl-foot{display:flex;gap:22px;padding:0 6px;color:var(--ink-2);font-size:11px}
+  .tl-foot b{color:var(--ink-1)}
+
+  /* ============================================================
+     TODAY CARD — read-only fusion of 3 reads
+     ============================================================ */
+  .today .ph .pin{color:var(--spine);font-size:10px;letter-spacing:1px}
+  .session-head{display:flex;align-items:flex-start;gap:14px;padding:2px 0 14px}
+  .session-head .date{font-family:var(--sans);font-size:22px;font-weight:650;letter-spacing:-.3px;color:var(--ink-0);line-height:1.1}
+  .session-head .meta{color:var(--ink-2);font-size:11px;margin-top:3px}
+  .session-head .spacer{flex:1}
+  .verdict{
+    font-size:11px;padding:5px 10px;border-radius:20px;border:1px solid;
+    white-space:nowrap;align-self:center;
+  }
+  .verdict.hard{color:var(--warn);border-color:rgba(255,210,74,.4);background:rgba(255,210,74,.06)}
+
+  /* three-read envelope strip */
+  .reads{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+  .read{background:var(--bg-2);border:1px solid var(--line-soft);border-radius:var(--r);padding:10px 11px;position:relative;overflow:hidden}
+  .read::after{content:"";position:absolute;left:0;top:0;bottom:0;width:2px}
+  .read.ladder::after{background:var(--ladder)}
+  .read.health::after{background:var(--health)}
+  .read.oura::after{background:var(--oura)}
+  .read .src{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-2)}
+  .read .big{font-family:var(--sans);font-size:19px;font-weight:650;letter-spacing:-.3px;margin-top:5px}
+  .read .unit{font-size:11px;color:var(--ink-2);font-weight:400;margin-left:2px}
+  .read .rows{margin-top:8px;border-top:1px solid var(--line-soft);padding-top:7px}
+  .read .kv{display:flex;justify-content:space-between;font-size:11px;padding:1px 0}
+  .read .kv span:first-child{color:var(--ink-2)}
+  .read.ladder .big{color:var(--ladder)}
+  .read.health .big{color:var(--health)}
+  .read.oura .big{color:var(--oura)}
+
+  /* lift detail table */
+  .lift-h{display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-2);margin:4px 0 8px}
+  .lift-h .src{color:var(--ladder)}
+  table.lift{width:100%;border-collapse:collapse;font-size:12px}
+  table.lift th{
+    text-align:left;color:var(--ink-2);font-weight:500;font-size:10px;
+    letter-spacing:1px;text-transform:uppercase;padding:0 8px 6px;border-bottom:1px solid var(--line-soft)
+  }
+  table.lift th.r,table.lift td.r{text-align:right}
+  table.lift td{padding:7px 8px;border-bottom:1px solid var(--line-soft)}
+  table.lift tr:hover td{background:var(--bg-2)}
+  table.lift .ex{color:var(--ink-0);font-weight:600}
+  table.lift .sets{color:var(--ink-1)}
+  table.lift .e1rm{color:var(--ladder);font-variant-numeric:tabular-nums}
+  table.lift .delta{font-size:10px;margin-left:6px}
+  .up{color:var(--good)} .flat{color:var(--ink-2)} .down{color:var(--bad)}
+  .roff{color:var(--ink-3);font-size:11px;padding-top:8px}
+
+  /* ============================================================
+     TRENDS STRIP
+     ============================================================ */
+  .trend-block{padding:12px 14px;border-bottom:1px solid var(--line-soft)}
+  .trend-block:last-child{border-bottom:none}
+  .trend-head{display:flex;align-items:baseline;gap:8px;margin-bottom:9px}
+  .trend-head .t{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-1)}
+  .trend-head .src{font-size:9px;letter-spacing:1px;color:var(--ink-3);text-transform:uppercase}
+  .trend-head .spacer{flex:1}
+  .trend-head .val{font-family:var(--sans);font-size:17px;font-weight:650}
+  .trend-head .val .u{font-size:10px;color:var(--ink-2);font-weight:400}
+  .trend-head .chg{font-size:11px;margin-left:7px}
+  .spark{display:block;width:100%;height:46px}
+  .glabels{display:flex;justify-content:space-between;font-size:9px;color:var(--ink-3);letter-spacing:1px;margin-top:3px}
+
+  /* cold-start lift progression — "collecting", never broken */
+  .coldstart{
+    border:1px dashed var(--line);border-radius:var(--r);
+    background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(255,255,255,.012) 9px,rgba(255,255,255,.012) 18px);
+    padding:16px 14px;text-align:center;
+  }
+  .coldstart .cs-h{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--ladder);margin-bottom:8px;display:flex;align-items:center;gap:7px;justify-content:center}
+  .csbar{height:5px;background:var(--bg-3);border-radius:3px;overflow:hidden;margin:0 auto 9px;max-width:230px}
+  .csbar i{display:block;height:100%;width:24%;background:linear-gradient(90deg,var(--spine-dim),var(--ladder));border-radius:3px}
+  .coldstart .cs-msg{color:var(--ink-1);font-size:12px}
+  .coldstart .cs-msg b{color:var(--ink-0)}
+  .coldstart .cs-sub{color:var(--ink-2);font-size:11px;margin-top:4px}
+  .cta{
+    display:inline-flex;align-items:center;gap:7px;margin-top:11px;
+    background:rgba(122,162,255,.08);border:1px solid rgba(122,162,255,.35);
+    color:var(--ladder);font-family:var(--mono);font-size:11px;
+    padding:6px 13px;border-radius:var(--r);cursor:pointer;
+  }
+  .cta:hover{background:rgba(122,162,255,.16)}
+
+  .footnote{margin-top:22px;color:var(--ink-3);font-size:10px;letter-spacing:.5px;text-align:center}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- TOP BAR -->
+  <header class="top">
+    <div class="brand">
+      <span class="glyph">▌▌</span>
+      <h1>TRAINING&nbsp;<span class="dim">/</span>&nbsp;TIMELINE</h1>
+      <span class="ver">v1 · velozlabs</span>
+    </div>
+    <div class="legend">
+      <span><i style="background:var(--spine)"></i>actual</span>
+      <span><i style="background:var(--ladder)"></i>lift</span>
+      <span><i style="background:var(--health)"></i>health</span>
+      <span><i style="background:var(--oura)"></i>recovery</span>
+      <span><i style="background:var(--planned);border:1px dashed var(--ink-3)"></i>planned</span>
+    </div>
+    <div class="spacer"></div>
+    <div class="clock">MON <b>29 JUN 2026</b> · 06:14</div>
+    <button class="syncbtn" onclick="this.querySelector('span:last-child').textContent='synced ·now'">
+      <span class="dot live"></span><span>Sync · 41m ago</span>
+    </button>
+  </header>
+
+  <!-- ================= TIMELINE SPINE ================= -->
+  <section class="panel timeline-panel">
+    <div class="ph">
+      <span class="label">Spine</span>
+      <span class="sub">planned vs actual · select a session to read</span>
+      <div class="spacer"></div>
+      <span class="sub">Jun 15 → Jul 03</span>
+    </div>
+    <div class="tl-wrap">
+      <div class="tl-axis" id="axis">
+        <div class="past-fill" style="width:72%"></div>
+        <div class="now" style="left:72%"></div>
+        <!-- nodes injected by JS -->
+      </div>
+      <div class="tl-foot">
+        <span>last 14d: <b>9</b> sessions logged</span>
+        <span>volume: <b>48,210 kg</b></span>
+        <span>avg readiness: <b style="color:var(--oura)">71</b></span>
+        <span>streak: <b>4</b> wk</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TWO-UP: TODAY CARD + TRENDS ================= -->
+  <div class="grid">
+
+    <!-- ---------- TODAY CARD ---------- -->
+    <section class="panel today">
+      <div class="ph">
+        <span class="label">Today Card</span>
+        <span class="pin">● read-only</span>
+        <div class="spacer"></div>
+        <span class="sub" id="cardSrc">fused · ladder + health + oura</span>
+      </div>
+      <div class="pbody">
+
+        <div class="session-head">
+          <div>
+            <div class="date" id="cardDate">Thu · 25 Jun</div>
+            <div class="meta" id="cardMeta">Lower — Squat focus · 14:02–15:11 · session #37</div>
+          </div>
+          <div class="spacer"></div>
+          <div class="verdict hard" id="cardVerdict">trained hard on a 62 readiness day</div>
+        </div>
+
+        <!-- three reads -->
+        <div class="reads">
+          <div class="read health">
+            <div class="src">Physiology · Apple Health</div>
+            <div class="big">69<span class="unit">min</span></div>
+            <div class="rows">
+              <div class="kv"><span>avg HR</span><span class="num">138 bpm</span></div>
+              <div class="kv"><span>peak HR</span><span class="num">171 bpm</span></div>
+              <div class="kv"><span>calories</span><span class="num">612 kcal</span></div>
+            </div>
+          </div>
+          <div class="read oura">
+            <div class="src">Recovery · Oura</div>
+            <div class="big">62</div>
+            <div class="rows">
+              <div class="kv"><span>HRV</span><span class="num">41 ms</span></div>
+              <div class="kv"><span>sleep</span><span class="num">74 · 6h41</span></div>
+              <div class="kv"><span>rest HR</span><span class="num">54 bpm</span></div>
+            </div>
+          </div>
+          <div class="read ladder">
+            <div class="src">Lift load · Ladder</div>
+            <div class="big">18.4<span class="unit">k kg</span></div>
+            <div class="rows">
+              <div class="kv"><span>exercises</span><span class="num">5</span></div>
+              <div class="kv"><span>working sets</span><span class="num">19</span></div>
+              <div class="kv"><span>avg RPE</span><span class="num">8.2</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- lift detail -->
+        <div class="lift-h"><span class="src">▸ Lift detail</span><span>· parsed screenshot · confirmed</span></div>
+        <table class="lift">
+          <thead><tr>
+            <th>Exercise</th><th>Top set</th><th class="r">RPE</th><th class="r">est 1RM</th>
+          </tr></thead>
+          <tbody>
+            <tr><td class="ex">Back Squat</td><td class="sets">5 × 142.5 kg</td><td class="r">8.5</td>
+                <td class="r e1rm">181 kg<span class="delta up">▲ +2.3</span></td></tr>
+            <tr><td class="ex">Romanian DL</td><td class="sets">8 × 110 kg</td><td class="r">8.0</td>
+                <td class="r e1rm">139 kg<span class="delta up">▲ +1.1</span></td></tr>
+            <tr><td class="ex">Leg Press</td><td class="sets">12 × 220 kg</td><td class="r">8.5</td>
+                <td class="r e1rm">—</td></tr>
+            <tr><td class="ex">Bulgarian Split Sq</td><td class="sets">10 × 28 kg</td><td class="r">8.0</td>
+                <td class="r e1rm">—</td></tr>
+            <tr><td class="ex">Standing Calf</td><td class="sets">15 × 90 kg</td><td class="r">7.5</td>
+                <td class="r e1rm">—</td></tr>
+          </tbody>
+        </table>
+        <div class="roff">est 1RM via Epley · derived in view, not stored · RPE-flagged sets contribute to progression</div>
+
+      </div>
+    </section>
+
+    <!-- ---------- TRENDS STRIP ---------- -->
+    <section class="panel">
+      <div class="ph">
+        <span class="label">Trends</span>
+        <span class="sub">drill-down · 90d</span>
+        <div class="spacer"></div>
+        <span class="sub">backfilled</span>
+      </div>
+
+      <!-- BODY COMP -->
+      <div class="trend-block">
+        <div class="trend-head">
+          <span class="t">Weight</span><span class="src">Apple · scale</span>
+          <span class="spacer"></span>
+          <span class="val">84.1<span class="u"> kg</span></span><span class="chg down">▼ 1.9</span>
+        </div>
+        <svg class="spark" viewBox="0 0 300 46" preserveAspectRatio="none" id="sp1"></svg>
+        <div class="glabels"><span>APR</span><span>MAY</span><span>JUN</span></div>
+      </div>
+
+      <div class="trend-block">
+        <div class="trend-head">
+          <span class="t">Body fat</span><span class="src">Apple · scale</span>
+          <span class="spacer"></span>
+          <span class="val">17.4<span class="u"> %</span></span><span class="chg good">▼ 1.2</span>
+        </div>
+        <svg class="spark" viewBox="0 0 300 46" preserveAspectRatio="none" id="sp2"></svg>
+        <div class="glabels"><span>APR</span><span>MAY</span><span>JUN</span></div>
+      </div>
+
+      <div class="trend-block">
+        <div class="trend-head">
+          <span class="t">Lean mass</span><span class="src">derived</span>
+          <span class="spacer"></span>
+          <span class="val">69.5<span class="u"> kg</span></span><span class="chg up">▲ 0.6</span>
+        </div>
+        <svg class="spark" viewBox="0 0 300 46" preserveAspectRatio="none" id="sp3"></svg>
+        <div class="glabels"><span>APR</span><span>MAY</span><span>JUN</span></div>
+      </div>
+
+      <!-- RECOVERY -->
+      <div class="trend-block">
+        <div class="trend-head">
+          <span class="t">Readiness</span><span class="src">Oura</span>
+          <span class="spacer"></span>
+          <span class="val" style="color:var(--oura)">71<span class="u"> 7d avg</span></span><span class="chg flat">— 0</span>
+        </div>
+        <svg class="spark" viewBox="0 0 300 46" preserveAspectRatio="none" id="sp4"></svg>
+        <div class="glabels"><span>APR</span><span>MAY</span><span>JUN</span></div>
+      </div>
+
+      <!-- LIFT PROGRESSION — COLD START -->
+      <div class="trend-block">
+        <div class="trend-head">
+          <span class="t" style="color:var(--ladder)">Lift progression</span><span class="src">Ladder · est 1RM</span>
+        </div>
+        <div class="coldstart">
+          <div class="cs-h"><span class="dot" style="background:var(--ladder)"></span>Collecting</div>
+          <div class="csbar"><i></i></div>
+          <div class="cs-msg"><b>9 sessions logged</b> · ~12 more for a trend line</div>
+          <div class="cs-sub">Progression charts unlock once each lift has ≥4 datapoints. Body-comp &amp; recovery above are already full from backfill.</div>
+          <button class="cta">▸ Upload a Ladder screenshot</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="footnote">one spine · three reads — timeline owns the data, today card &amp; trends are reads off it · single user · dark terminal</div>
+</div>
+
+<script>
+/* ---------- mock timeline data ---------- */
+const days = [
+  {d:"15",day:"MON",label:"Push",   kind:"actual", r:78},
+  {d:"16",day:"TUE",label:"Pull",   kind:"actual", r:74},
+  {d:"17",day:"WED",label:"rest",   kind:"rest"},
+  {d:"18",day:"THU",label:"Lower",  kind:"actual", r:69},
+  {d:"19",day:"FRI",label:"Push",   kind:"both",   r:82},
+  {d:"20",day:"SAT",label:"Run",    kind:"actual", r:70},
+  {d:"21",day:"SUN",label:"rest",   kind:"rest"},
+  {d:"22",day:"MON",label:"Pull",   kind:"actual", r:75},
+  {d:"23",day:"TUE",label:"Push",   kind:"actual", r:66},
+  {d:"24",day:"WED",label:"rest",   kind:"rest"},
+  {d:"25",day:"THU",label:"Lower",  kind:"actual", r:62, sel:true},
+  {d:"26",day:"FRI",label:"Push",   kind:"actual", r:73},
+  {d:"27",day:"SAT",label:"rest",   kind:"rest"},
+  {d:"28",day:"SUN",label:"Run",    kind:"actual", r:80},
+  /* future / planned (ghosted) */
+  {d:"29",day:"MON",label:"Pull",   kind:"planned"},
+  {d:"30",day:"TUE",label:"Push",   kind:"planned"},
+  {d:"01",day:"WED",label:"rest",   kind:"rest", future:true},
+  {d:"02",day:"THU",label:"Lower",  kind:"planned"},
+  {d:"03",day:"FRI",label:"Push",   kind:"planned"},
+];
+
+const axis = document.getElementById("axis");
+const N = days.length;
+days.forEach((s,i)=>{
+  const x = (i/(N-1))*100;
+  const node = document.createElement("div");
+  let cls = "node " + s.kind + (s.sel?" sel":"");
+  node.className = cls;
+  node.style.left = x+"%";
+  axis.appendChild(node);
+
+  // readiness pip above
+  if(s.r!==undefined){
+    const pip=document.createElement("div");
+    pip.className="npip"+(s.r<65?" lo":"");
+    pip.style.left=x+"%"; pip.style.position="absolute";
+    pip.style.bottom="auto"; pip.style.top="-30px";
+    pip.style.transform="translateX(-50%)";
+    pip.textContent=s.r;
+    node.appendChild(pip);
+  } else if(s.kind==="planned"){
+    const pip=document.createElement("div");
+    pip.className="npip planned"; pip.style.top="-30px";
+    pip.style.transform="translateX(-50%)"; pip.style.position="absolute";
+    pip.textContent="·"; node.appendChild(pip);
+  }
+
+  // caption below
+  const cap=document.createElement("div");
+  cap.className="ncap";
+  cap.innerHTML = (s.kind==="rest"
+      ? '<b style="color:var(--ink-3)">rest</b>'
+      : '<b style="'+(s.kind==='planned'?'color:var(--ink-3)':'')+'">'+s.label+'</b>')
+    + '<span class="day">'+s.day+' '+s.d+'</span>';
+  node.appendChild(cap);
+
+  node.addEventListener("click",()=>select(i));
+});
+
+/* clicking a node updates the Today card (light demo wiring) */
+const verdicts = {
+  hard:"trained hard on a 62 readiness day",
+};
+function select(i){
+  document.querySelectorAll(".node").forEach(n=>n.classList.remove("sel"));
+  const nodes=document.querySelectorAll(".node");
+  nodes[i].classList.add("sel");
+  const s=days[i];
+  const monthMap={"15":"Jun","16":"Jun","17":"Jun","18":"Jun","19":"Jun","20":"Jun","21":"Jun","22":"Jun","23":"Jun","24":"Jun","25":"Jun","26":"Jun","27":"Jun","28":"Jun","29":"Jun","30":"Jun","01":"Jul","02":"Jul","03":"Jul"};
+  document.getElementById("cardDate").textContent = s.day.charAt(0)+s.day.slice(1).toLowerCase()+" · "+s.d+" "+monthMap[s.d];
+  if(s.kind==="planned"){
+    document.getElementById("cardMeta").textContent = s.label+" — planned · not yet trained";
+    document.getElementById("cardVerdict").textContent = "upcoming";
+  } else if(s.kind==="rest"){
+    document.getElementById("cardMeta").textContent = "Rest day · no session";
+    document.getElementById("cardVerdict").textContent = "recovery";
+  } else {
+    document.getElementById("cardMeta").textContent = s.label+" focus · readiness "+(s.r??"—");
+    document.getElementById("cardVerdict").textContent = s.r && s.r<65 ? "trained hard on a "+s.r+" readiness day" : "in the green";
+  }
+}
+
+/* ---------- sparklines ---------- */
+function spark(id, pts, color, fill){
+  const svg=document.getElementById(id);
+  const W=300,H=46,pad=4;
+  const min=Math.min(...pts), max=Math.max(...pts), rng=(max-min)||1;
+  const X=i=>pad+(i/(pts.length-1))*(W-pad*2);
+  const Y=v=>H-pad-((v-min)/rng)*(H-pad*2);
+  let d="M"+X(0)+" "+Y(pts[0]);
+  for(let i=1;i<pts.length;i++) d+=" L"+X(i)+" "+Y(pts[i]);
+  const area=d+" L"+X(pts.length-1)+" "+H+" L"+X(0)+" "+H+" Z";
+  svg.innerHTML=
+    '<path d="'+area+'" fill="'+fill+'" />'+
+    '<path d="'+d+'" fill="none" stroke="'+color+'" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>'+
+    '<circle cx="'+X(pts.length-1)+'" cy="'+Y(pts[pts.length-1])+'" r="2.3" fill="'+color+'"/>';
+}
+spark("sp1",[86.0,85.7,85.9,85.4,85.1,85.3,84.8,84.6,84.9,84.3,84.0,84.2,83.9,84.1], "#ff7a59","rgba(255,122,89,.08)");
+spark("sp2",[18.6,18.5,18.7,18.3,18.1,18.2,17.9,17.8,18.0,17.6,17.5,17.4,17.5,17.4], "#ff7a59","rgba(255,122,89,.08)");
+spark("sp3",[68.9,69.0,68.8,69.1,69.0,69.2,69.1,69.3,69.2,69.4,69.5,69.4,69.5,69.5], "#3ddc84","rgba(61,220,132,.08)");
+spark("sp4",[64,72,68,75,70,66,73,69,78,71,67,74,80,71], "#c08bff","rgba(192,139,255,.08)");
+</script>
+</body>
+</html>
