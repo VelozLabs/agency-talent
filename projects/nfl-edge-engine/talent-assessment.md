@@ -7,6 +7,13 @@ maintain the NFL Edge Engine?
 Swarm) that snapshots the NFL odds board, maintains power ratings, computes edge
 against the market, and grades closing line value (CLV).
 
+> **Provenance.** The working copy of this document lives in the private
+> `VelozLabs/NFL-EDGE` repo at `docs/talent-assessment.md`, alongside the code it
+> describes; paths such as `docs/…` and `talents/…` below refer to that tree. This
+> copy is synced from it. Section 1 was corrected on 2026-09-11: it previously
+> called the four-agent swarm "a genuine multi-agent LLM system", which a live
+> dry run disproved — see Sprint 5.
+
 ---
 
 ## 1. What the project actually is
@@ -19,14 +26,16 @@ distinct skill demand, which is what the talent mapping keys off of.
 | **Service shell** | `app.module.ts`, `main.ts`, NestJS + Swagger, health check | Backend architecture, dependency injection, config |
 | **Data ingestion** | `odds/`, `espn/`, `weather/`, `polymarket/` | Resilient third-party API integration, tokenizers, de-vig math |
 | **Persistence** | `prisma/schema.prisma` (append-only `OddsSnapshot`, `Game`, ratings, `Bet`) | Schema design, indexing, append-only integrity |
-| **Multi-agent swarm** | `swarm/`, `agents/agent1..4`, `judgment-resolver`, `lib/llm.ts` | LLM orchestration, prompt/eval discipline, retry/backoff |
+| **Multi-agent swarm** | `swarm/`, `agents/agent1..4`, `judgment-resolver`, `lib/llm.ts` | **Demoted in Sprint 5.** Adapters + optional brief. Not a decision layer. See `docs/sprint5-ideation.md`. |
 | **Quant model** | `model/ratings.service.ts`, `model/edge.service.ts`, `lib/devig.ts`, `lib/margin.ts` | Power ratings, EV, fractional Kelly, push probabilities — statistical modelling |
 | **Grading & settlement** | `grading/` (CLV, settle), `snapshots/` | Financial correctness, reconciliation |
 | **Distribution & ops** | `discord/` (bot, slash, webhook, nacl verify), snapshot cron cadence | Chat integration, scheduling, secrets, uptime |
 
-Two facts shape the staffing: (1) the money-sensitive parts are the **model** and
-**grading** — bugs there cost real bankroll, not just a bad UX; and (2) the swarm is a
-genuine multi-agent LLM system, not a single prompt.
+Two facts shape the staffing: (1) the money-sensitive parts are the **model**
+and **grading** — bugs there cost real bankroll, not just a bad UX; and (2) the
+inherited four-agent layer is leftover Abacus/CFB shape. It is not a genuine
+ensemble. Sprint 5 makes that explicit. The talents that remain load-bearing
+are the modeller, the backend architect, data/ingestion, and snapshot ops.
 
 ---
 
@@ -40,17 +49,15 @@ admin, discord controllers). The catalog role is literally "scalable system desi
 database architecture, API development." This is the spine of the whole service.
 
 ### `engineering-ai-engineer`
-Owns the agent layer (`agents/agent1-sentiment` … `agent4-summarizer`,
-`judgment-resolver`) and `lib/llm.ts`. Catalog role: "building intelligent features, data
-pipelines, and AI-powered applications." The README's own change log (Agent 1 was
-averaging American odds incorrectly; converting to probability first) is exactly the kind
-of modelling-adjacent bug this talent exists to catch.
+Owns `lib/llm.ts` and the optional `BriefRenderer` (was Agent 4). Catalog
+role stays “intelligent features” — here that means a template-first brief
+and a prompt that cannot invent EV or injuries. Does **not** own BET/PASS.
 
-### `agents-orchestrator` — multi-agent orchestration
-`SwarmService` fans four agents + a resolver across a slate per game. That is
-orchestration, not single-model inference. This talent covers the coordination,
-per-game sequencing, and judgment-resolution flow that `engineering-ai-engineer` alone
-doesn't.
+### `agents-orchestrator` — pipeline, not four analysts
+`SwarmService` used to fan four personas. Sprint 5 retargets this talent to
+sequence capture → `GamePacket` → edge → render → Discord. Quality gate:
+incomplete packet ⇒ no brief. The upstream catalog role is a *dev* pipeline
+manager; do not re-create a research swarm to give this talent work.
 
 ### `engineering-database-optimizer`
 The `OddsSnapshot` table is **append-only and is the historical-odds substitute** — the
@@ -74,10 +81,10 @@ metric the whole system is graded on. Pairs with `engineering-ai-engineer` — t
 specifies and validates, the AI engineer implements. This is the role that was missing
 from the catalog when this assessment was first written (see §4).
 
-### `specialized-model-qa` — LLM/Model QA
-The four agents emit labels and `needs_judgment` flags that feed money decisions. This
-talent validates model outputs, guards against the "confidently wrong LLM" failure mode,
-and is the natural owner of eval sets for the sentiment/sharp labels.
+### `specialized-model-qa` — model QA
+Validates `EdgeResult` / cover calibration, not Agent 1 lean labels. Brief
+fidelity: template may only contain `GamePacket` fields. Does not sign the
+modeller’s own spec.
 
 ### `engineering-devops-automator`
 The snapshot **cron cadence is the product** (Tue–Thu 4h → 15 min in the final hour
@@ -146,19 +153,20 @@ before any real bankroll is staked.
 
 **Build / port completion**
 `engineering-backend-architect` (lead) · `sports-betting-modeler` ·
-`engineering-ai-engineer` · `agents-orchestrator` · `engineering-data-engineer` ·
-`engineering-database-optimizer` · `testing-api-tester` · `report-distribution-agent`
+`engineering-data-engineer` · `engineering-database-optimizer` ·
+`testing-api-tester` · `report-distribution-agent` ·
+`engineering-ai-engineer` (optional brief only)
 
 **Hardening before first live week**
 `engineering-devops-automator` · `engineering-sre` · `specialized-model-qa` ·
-`sports-betting-modeler` (backtest + CLV audit, QB lever populated) ·
+`sports-betting-modeler` (backtest + CLV audit, D30 seed, QB lever) ·
 `engineering-security-engineer` · `engineering-code-reviewer` ·
-`support-legal-compliance-checker`
+`support-legal-compliance-checker` · `testing-reality-checker`
 
 **Weekly operation**
 `engineering-devops-automator` (cron) · `sports-betting-modeler` (ratings, edge report,
 staking, CLV audit) · `support-finance-tracker` (P&L reconciliation) ·
-`testing-reality-checker` (gap watch) · `engineering-ai-engineer` (model iteration)
+`testing-reality-checker` (gap watch) · `agents-orchestrator` (packet pipeline, not swarm)
 
 **No remaining external gap.** The quantitative betting-model owner is now
 `sports-betting-modeler`, added to this catalog.
@@ -168,9 +176,9 @@ staking, CLV audit) · `support-finance-tracker` (P&L reconciliation) ·
 ## 6. One-line answer
 
 Staff it with a **backend architect** to lead, a **sports-betting-modeler** to own the
-math that *is* the edge, an **AI engineer + agents-orchestrator** for the LLM swarm,
-**data-engineer + database-optimizer** for the append-only odds pipeline,
-**devops-automator + SRE** for the make-or-break snapshot cron, and **model-QA +
-reality-checker + finance-tracker + legal-compliance** to keep a money-handling system
-honest. The quant role that this assessment originally flagged as missing now exists in
-the catalog, so the whole team is staffable from here.
+math that *is* the edge, **data-engineer + database-optimizer** for the append-only
+odds pipeline, **devops-automator + SRE** for the snapshot cron, and
+**model-QA + reality-checker + finance-tracker + legal** to keep a money-handling
+system honest. The AI engineer and agents-orchestrator stay on the team as
+**brief + pipeline**, not as a four-agent research swarm. Minutes:
+`docs/sprint5-ideation.md`.
