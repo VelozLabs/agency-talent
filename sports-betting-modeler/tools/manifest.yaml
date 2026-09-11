@@ -1,0 +1,100 @@
+# Tool manifest — declare tools this agent can use
+
+builtin_tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - Glob
+  - Grep
+
+# Odds & sports data — market prices, schedules, injuries, weather.
+# Sharp books (Pinnacle, Circa) are the fair-value reference; soft books are
+# where bets are placed. Never average American odds across these — convert to
+# implied probability and de-vig first.
+data_sources:
+  - name: the-odds-api
+    type: rest_api
+    purpose: Live and historical odds board across books (spreads, totals, moneylines)
+    auth: api_key
+    notes: Primary market feed. Snapshot append-only; never overwrite history.
+  - name: pinnacle-odds
+    type: rest_api
+    purpose: Sharp-book reference line for fair-value and closing-line benchmarks
+    auth: api_key
+    notes: Treat as the market's opinion; weight by origin, not by book count.
+  - name: espn-api
+    type: rest_api
+    purpose: Schedules, scores, final margins, team and player metadata
+    auth: none
+  - name: injury-feed
+    type: rest_api
+    purpose: Injury reports and inactives — QB status in particular
+    auth: api_key
+    notes: Latency-critical. Unresolved QB status is a no-bet condition.
+  - name: weather-api
+    type: rest_api
+    purpose: Game-time wind, precipitation, temperature for totals modelling
+    auth: api_key
+
+# Persistence — point-in-time reconstruction is the whole game.
+database:
+  - name: postgres
+    type: sql
+    purpose: Odds snapshots, ratings history, bets, grading and CLV records
+    access: read_write
+    notes: OddsSnapshot is append-only. Point-in-time queries only when backtesting.
+  - name: prisma
+    type: orm
+    purpose: Schema access and migrations for the model and grading tables
+    access: read_write
+  - name: sql-console
+    type: query
+    purpose: Ad-hoc analysis, cohort attribution by model version, CLV audits
+    access: read_only
+
+# Statistical computing — ratings fitting, distributions, simulation.
+statistical_computing:
+  - name: python3
+    type: runtime
+    purpose: Modelling, fitting and analysis runtime
+  - name: numpy
+    type: library
+    purpose: Numerical arrays, probability arithmetic
+  - name: pandas
+    type: library
+    purpose: Slate, snapshot and results data wrangling
+  - name: scipy
+    type: library
+    purpose: Distributions, root-finding for power and Shin de-vig, hypothesis tests
+  - name: statsmodels
+    type: library
+    purpose: Regression diagnostics, confidence intervals, calibration checks
+  - name: scikit-learn
+    type: library
+    purpose: Ridge regression on point differential, walk-forward cross-validation
+  - name: matplotlib
+    type: library
+    purpose: Calibration plots, CLV distributions, drawdown and equity curves
+  - name: jupyter
+    type: notebook
+    purpose: Exploratory modelling — never the production path
+
+# Backtesting & risk — walk-forward, no look-ahead, honest sample sizes.
+backtesting:
+  - name: walk-forward-harness
+    type: internal
+    purpose: Rolling fit/predict evaluation against point-in-time odds snapshots
+    notes: Refuses any feature not available at simulated bet time.
+  - name: clv-grader
+    type: internal
+    purpose: Grades taken price vs sharp closing price in de-vigged probability points
+  - name: kelly-calculator
+    type: internal
+    purpose: Fractional Kelly stakes with per-bet caps and correlation adjustment
+  - name: monte-carlo-simulator
+    type: internal
+    purpose: Season simulation for drawdown distribution and risk of ruin
+  - name: bootstrap-ci
+    type: internal
+    purpose: Block-bootstrap confidence intervals on ROI and CLV, clustered by week

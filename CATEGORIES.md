@@ -106,13 +106,14 @@ XR, AR, VR, VisionOS, and immersive experience developers.
 - **technical-artist** - Technical art & rendering
 - *And 2+ more spatial specialists*
 
-## Specialized (5 talents)
+## Specialized (6 talents)
 Domain-specific experts and emerging technology specialists.
 - **specialized-document-generator** - Document generation
 - **specialized-developer-advocate** - Developer relations
 - **specialized-model-qa** - LLM/Model quality assurance
 - **specialized-cultural-intelligence-strategist** - Cultural consulting
 - **specialized-mcp-builder** - MCP protocol development
+- **sports-betting-modeler** - Quantitative sports-betting modelling (CLV, de-vig, power ratings, fractional Kelly)
 
 ## Support (8 talents)
 Customer support, operations, and support infrastructure.
@@ -152,6 +153,6 @@ Finance, HR, legal, compliance, and other cross-functional roles.
 
 ---
 
-**Total: 145+ AI agent talents across all categories**
+**Total: 146+ AI agent talents across all categories**
 
 For a complete index of all talents, see [TALENT_INDEX.md](TALENT_INDEX.md).

@@ -2,7 +2,7 @@
 
 A collection of AI agent talents converted from [agency-agents](https://github.com/msitarzewski/agency-agents).
 
-Contains **145** talents across the following categories:
+Contains **146** talents across the following categories:
 
 - **design** (Designer)
 - **engineering** (Engineer)

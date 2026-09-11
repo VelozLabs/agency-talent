@@ -1,6 +1,6 @@
 # Complete Talent Index
 
-**Total Talents: 145**
+**Total Talents: 146**
 
 This is a searchable index of all talents organized alphabetically by directory name and tagged by category.
 
@@ -164,6 +164,7 @@ This is a searchable index of all talents organized alphabetically by directory 
 - **specialized-document-generator** `specialized` - Document generation
 - **specialized-mcp-builder** `specialized` - MCP development
 - **specialized-model-qa** `specialized` - Model QA
+- **sports-betting-modeler** `specialized` - Quantitative sports-betting modelling (CLV, de-vig, power ratings, Kelly)
 - **study-abroad-advisor** `misc` - Education consulting
 - **supply-chain-strategist** `misc` - Supply chain strategy
 - **support-analytics-reporter** `support` - Support analytics
@@ -227,11 +228,11 @@ This is a searchable index of all talents organized alphabetically by directory 
 | Project Management | 5 |
 | Sales | 9 |
 | Spatial Computing | 9 |
-| Specialized | 5 |
+| Specialized | 6 |
 | Support | 8 |
 | Testing | 10 |
 | Miscellaneous | 10+ |
-| **TOTAL** | **~145** |
+| **TOTAL** | **~146** |
 
 ---
 

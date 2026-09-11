@@ -65,6 +65,15 @@ Polymarket) and `toSnapshotRows()` flattening. Catalog role: "Data engineering /
 The tokenizer rewrite (ESPN nickname matching, blocking ambiguous "new york"/"los
 angeles") is data-engineering work.
 
+### `sports-betting-modeler` — quantitative model owner
+Owns `model/ratings.service.ts`, `model/edge.service.ts`, `lib/devig.ts` and
+`lib/margin.ts` as *math*, not as code: which de-vig method applies to which market,
+the key-number structure behind push probability on 3/7/10, the QB adjustment (the
+largest single lever in the model), the Kelly fraction and its caps, and CLV as the
+metric the whole system is graded on. Pairs with `engineering-ai-engineer` — this talent
+specifies and validates, the AI engineer implements. This is the role that was missing
+from the catalog when this assessment was first written (see §4).
+
 ### `specialized-model-qa` — LLM/Model QA
 The four agents emit labels and `needs_judgment` flags that feed money decisions. This
 talent validates model outputs, guards against the "confidently wrong LLM" failure mode,
@@ -94,48 +103,74 @@ scheduling, the `x-api-key`-protected cron target, secrets (`ODDS_API_KEY`,
 
 ---
 
-## 4. The gap this catalog does not cleanly fill
+## 4. The gap this catalog did not cleanly fill — now filled
 
 **Quantitative / sports-betting modelling.** The heart of the edge —
 `projectMargin()`, power de-vig, EV, **fractional Kelly**, push probability on integer
-keys (3/7/10), CLV grading — is applied statistics / actuarial work. No talent in the
-145 is a "quant," "data scientist," or "betting model analyst."
+keys (3/7/10), CLV grading — is applied statistics / actuarial work. At the time of this
+assessment no talent in the 145 was a "quant," "data scientist," or "betting model
+analyst."
 
-`engineering-ai-engineer` (systematic, analytical) is the closest proxy and can carry
-the implementation, and `testing-reality-checker` guards the assumptions, but neither
-is a domain modeller. The README's own "Known gaps" are quant gaps: the QB adjustment
-"is the largest single lever in the model" and nothing populates it yet; season seeding
-doesn't blend Vegas win totals; totals are stored but unmodelled. **Recommendation:**
-treat this as an external hire or a new catalog talent (`engineering-quant-modeler` /
-`sports-analytics-modeler`) rather than assume an existing talent covers it.
+Why the gap existed: the catalog was converted from an upstream general-purpose agent
+repo whose coverage is software delivery, design, marketing and sales. Applied
+statistical modelling of a wagering market sits outside all of those, and the roles that
+look adjacent aren't. `engineering-ai-engineer` (systematic, analytical) is the closest
+proxy and can carry the implementation, and `testing-reality-checker` guards the
+assumptions, but neither is a domain modeller. The README's own "Known gaps" are quant
+gaps: the QB adjustment "is the largest single lever in the model" and nothing populates
+it yet; season seeding doesn't blend Vegas win totals; totals are stored but unmodelled.
+None of those are engineering defects — they are unowned modelling decisions, and a
+codebase can be perfectly built and still have no edge.
+
+**Resolution:** the gap is now filled by a new catalog talent, **`sports-betting-modeler`**
+(Sports Betting Modeler, role: Quantitative Analyst) — original to this repo rather than
+converted from upstream. It owns CLV as the north-star metric, de-vig method selection
+(multiplicative / additive / power / Shin), the probability-space rule that caught the
+"averaging American odds" bug, ridge/Elo power ratings with the QB lever and HFA
+estimation, empirical key-number margin distributions and push probability, fractional
+Kelly with hard caps and correlation adjustment, market-shrinkage discipline,
+walk-forward backtesting with no look-ahead, model versioning for per-cohort attribution,
+and the compliance framing. It is configured at temperature 0.25 rather than the catalog
+default 0.7, deliberately: this role should be reproducible and conservative, not
+creative.
+
+**Recommendation (updated):** staff `sports-betting-modeler` as a core team member from
+the start, paired with `engineering-ai-engineer` for implementation and
+`specialized-model-qa` for independent validation. No external hire is required. The
+remaining risk is not coverage but sequencing — the QB adjustment must be populated
+before any real bankroll is staked.
 
 ---
 
 ## 5. Staffing by phase
 
 **Build / port completion**
-`engineering-backend-architect` (lead) · `engineering-ai-engineer` ·
-`agents-orchestrator` · `engineering-data-engineer` · `engineering-database-optimizer` ·
-`testing-api-tester` · `report-distribution-agent`
+`engineering-backend-architect` (lead) · `sports-betting-modeler` ·
+`engineering-ai-engineer` · `agents-orchestrator` · `engineering-data-engineer` ·
+`engineering-database-optimizer` · `testing-api-tester` · `report-distribution-agent`
 
 **Hardening before first live week**
 `engineering-devops-automator` · `engineering-sre` · `specialized-model-qa` ·
+`sports-betting-modeler` (backtest + CLV audit, QB lever populated) ·
 `engineering-security-engineer` · `engineering-code-reviewer` ·
 `support-legal-compliance-checker`
 
 **Weekly operation**
-`engineering-devops-automator` (cron) · `support-finance-tracker` (P&L/CLV) ·
+`engineering-devops-automator` (cron) · `sports-betting-modeler` (ratings, edge report,
+staking, CLV audit) · `support-finance-tracker` (P&L reconciliation) ·
 `testing-reality-checker` (gap watch) · `engineering-ai-engineer` (model iteration)
 
-**Persistent gap to fill externally:** quantitative betting-model owner.
+**No remaining external gap.** The quantitative betting-model owner is now
+`sports-betting-modeler`, added to this catalog.
 
 ---
 
 ## 6. One-line answer
 
-Staff it with a **backend architect** to lead, an **AI engineer + agents-orchestrator**
-for the LLM swarm, **data-engineer + database-optimizer** for the append-only odds
-pipeline, **devops-automator + SRE** for the make-or-break snapshot cron, and
-**model-QA + reality-checker + finance-tracker + legal-compliance** to keep a
-money-handling system honest — and hire a **quant modeller from outside the catalog**,
-because that role, which is the actual edge, isn't here.
+Staff it with a **backend architect** to lead, a **sports-betting-modeler** to own the
+math that *is* the edge, an **AI engineer + agents-orchestrator** for the LLM swarm,
+**data-engineer + database-optimizer** for the append-only odds pipeline,
+**devops-automator + SRE** for the make-or-break snapshot cron, and **model-QA +
+reality-checker + finance-tracker + legal-compliance** to keep a money-handling system
+honest. The quant role that this assessment originally flagged as missing now exists in
+the catalog, so the whole team is staffable from here.
